@@ -33,7 +33,6 @@ const CustomerPage = () => {
     
     useEffect(() => {
         const dt = makeDataTable(dataTable.current);
-
         // Cleanup Function
         return () => {
             destroyDataTable(dt);

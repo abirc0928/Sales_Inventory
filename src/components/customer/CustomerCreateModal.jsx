@@ -12,7 +12,7 @@ const CustomerCreateModal = ({ loadAllData }) => {
         const formDataObj = Object.fromEntries(formData.entries());
 
         console.log(formDataObj);
-        myaxios.post("/create-product", formDataObj)
+        myaxios.post("/create-customer", formDataObj)
             .then((response) => {
                 if (response.status === 201) {
                     closeBtn.current.click();
