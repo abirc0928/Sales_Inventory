@@ -2,7 +2,9 @@ import React from 'react'
 import { useEffect, useRef, useState } from "react";
 import { destroyDataTable, makeDataTable } from "../../utils/datatable";
 import myaxios from '../../utils/myaxios';
+// import QuentityModal from "./QuentityModal";
 
+import QuentityModal from './QuentityModal'
 
 const ProductList = () => {
     const [isLoading, setIsLoading] = useState(false);
@@ -83,6 +85,7 @@ const ProductList = () => {
                     </div>
                 </div>
             </div>
+            {/* <QuentityModal selectedProduct={selectedProduct}/> */}
             <QuentityModal selectedProduct={selectedProduct}/>
         </>
     )

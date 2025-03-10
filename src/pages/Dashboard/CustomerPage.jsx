@@ -92,7 +92,7 @@ const CustomerPage = () => {
                                 </thead>
                                 <tbody id="tableList">
                                     {
-                                        data.slice().reverse().map((item, index) => (
+                                        data.map((item, index) => (
                                             <tr key={item.id} className={index % 2 === 0 ? "even" : "odd"}>
                                                 <td className="sorting_1">{index + 1}</td>
                                                 <td>{item.name}</td>
