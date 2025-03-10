@@ -4,19 +4,24 @@
 [Inventory Shop](https://inventoryshop.netlify.app/)
 
 ## Overview
-Inventory Shop is a web-based inventory management system that allows users to manage products, categories, and stock efficiently. It provides an intuitive interface for adding, updating, and deleting inventory items.
+
+**Inventory Shop** is a web-based inventory management system that enables users to efficiently manage products, categories, and stock levels. It provides an intuitive interface for adding, updating, and deleting inventory items while ensuring seamless tracking and sales management.
 
 ## Features
-- User authentication and authorization  
-- Product and category management  
-- Real-time stock updates  
-- Intuitive UI with a responsive design  
-- Secure API integration  
+
+✅ **User Authentication & Authorization** – Secure login and role-based access control for admins, sales managers, and staff.  
+✅ **Product & Category Management** – Add, update, and organize products into categories for better inventory tracking.  
+✅ **Real-time Stock Updates** – Monitor stock levels, set reorder points, and prevent stockouts or overstocking.  
+✅ **Sales & Invoice Management** – Process sales transactions, track sold items, generate, view, and print invoices while maintaining a record of all issued invoices.  
+✅ **Reporting & Analytics** – Generate insightful sales reports, stock movement reports, and transaction summaries for better decision-making.  
+✅ **Intuitive UI & Responsive Design** – User-friendly interface optimized for all devices.  
+✅ **Secure API Integration** – Ensuring secure data transfer and system reliability.  
+
+This system improves efficiency and accuracy for businesses, making inventory tracking and sales management effortless. 🚀
 
 ## Technologies Used
-- **Frontend:** ReactJS, Tailwind CSS, DaisyUI  
+- **Frontend:** ReactJS, Bootstarp 
 - **Backend:** Django Rest Framework (DRF)  
-- **Database:** PostgreSQL/MySQL  
 - **Authentication:** JWT-based authentication  
 - **Hosting:** Netlify (Frontend), Backend (TBD)  
 
