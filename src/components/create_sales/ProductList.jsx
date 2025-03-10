@@ -2,7 +2,7 @@ import React from 'react'
 import { useEffect, useRef, useState } from "react";
 import { destroyDataTable, makeDataTable } from "../../utils/datatable";
 import myaxios from '../../utils/myaxios';
-import QuentityModal from './quentityModal';
+import QuentityModal from "./quentityModal";
 
 const ProductList = () => {
     const [isLoading, setIsLoading] = useState(false);
