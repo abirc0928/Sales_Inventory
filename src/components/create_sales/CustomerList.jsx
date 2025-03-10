@@ -37,6 +37,7 @@ const CustomerList = () => {
 
     const handleAddCustomer = (id) => {
         const customerID = parseInt(id);
+        console.log('c', customerID)
         const selectedCustomer = data.find((item) => item.id === customerID);
         if (selectedCustomer) {
             setAddaddCustomer(selectedCustomer); // Set directly instead of wrapping in an object

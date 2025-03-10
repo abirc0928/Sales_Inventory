@@ -1,22 +1,24 @@
 import React, { useEffect, useState } from "react";
 import { UserContext } from "../../pages/Dashboard/SalePage";
 import { useContext } from "react";
-
+import myaxios from "../../utils/myaxios";
+import { errorToast, successToast } from "../../utils/toast";
+import { useNavigate } from 'react-router';
 const BillCreate = () => {
+  const navigate = useNavigate();
   const { addProduct, addCustomer, setAddProduct } = useContext(UserContext);
   const [total, setTotal] = useState(0);
   const [vat, setVat] = useState(0);
   const [discountPersent, setDiscountPersent] = useState(0);
   const [discountAmount, setDiscuntAmount] = useState(0);
-  const [totalDiscount, setTotalDiscount] = useState(0)
+  const [totalDiscount, setTotalDiscount] = useState(0);
   const [tempTotal, setTempTotal] = useState(0);
 
   const handleRemove = (removeId) => {
     const updatedProducts = addProduct.filter((item) => item.id !== removeId);
     setAddProduct(updatedProducts);
-   
   };
-  console.log(addProduct);
+
   useEffect(() => {
     let updateTotal = 0;
     addProduct.map((item) => {
@@ -30,21 +32,55 @@ const BillCreate = () => {
   const DiscountChange = (e) => {
     const newDiscount = parseFloat(e.target.value) || 0; // Ensure numerical input
     setDiscountPersent(newDiscount);
-    // Calculate total using originalTotal
     const discountedTotal = tempTotal - (tempTotal * newDiscount) / 100;
-    setTotalDiscount(discountedTotal)
+    setTotalDiscount(discountedTotal);
     setDiscuntAmount(tempTotal - discountedTotal);
     setTotal(discountedTotal);
   };
 
-  const createInvoice = () => {
-    console.log("invoice");
-    if (addProduct.length != 0 && addCustomer.length != 0) {
-      console.log("yes");
+  const createInvoice = async (e) => {
+    console.log("Creating invoice...");
+
+    if (addProduct.length !== 0 && addCustomer) {
+      console.log("Adding products and customer to invoice...");
+
+      const invoiceData = {
+        total: Number(total),
+        discount: Number(discountAmount),
+        vat: Number(vat),
+        payable: Number(total) + Number(vat),
+        customer_id: addCustomer.id,
+        products: addProduct.map(item => ({
+          product_id: item.id,
+          qty: item.quantity,
+          sale_price: item.price
+        }))
+      };
+
+      console.log(addProduct)
+      console.log("Invoice Data: ", invoiceData);
+
+      try {
+        const response = await myaxios.post('/invoice-create', invoiceData);
+        console.log("Response: ", response); // Check the full response
+
+        if (response.status === 200) {
+          successToast("Invoice created successfully");
+          navigate("/dashboard/invoice");
+        } else {
+          console.error("Failed to create invoice: ", response.data);
+          errorToast("Failed to create Invoice. Server returned invalid data.");
+        }
+      } catch (error) {
+        console.error("Error while creating invoice: ", error);
+        errorToast("Failed to create Invoice");
+      }
     } else {
-      console.log("no");
+      console.log("No customer or products to create invoice.");
+      errorToast("Please add a customer and products before creating an invoice.");
     }
   };
+
   return (
     <div className="col-md-4 col-lg-4 p-2">
       <div className="shadow-sm h-100 bg-white rounded-3 p-3">
