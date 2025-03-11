@@ -15,6 +15,7 @@ import CategoryPage from './pages/Dashboard/CategoryPage'
 import InvoicePage from './pages/Dashboard/InvoicePage'
 import ProductPage from './pages/Dashboard/ProductPage'
 import SalePage from './pages/Dashboard/SalePage'
+import ReportPage from './pages/Dashboard/ReportPage'
 
 const App = () => {
   return (
@@ -37,8 +38,8 @@ const App = () => {
           <Route path='invoice' element={<InvoicePage />} />
           <Route path='products' element={<ProductPage />} />
           <Route path='creact_sales' element={<SalePage />} />
+          <Route path='report' element={<ReportPage />}/>
         </Route>
-
         <Route path="*" element={<h1>404 Page Not Found</h1>} />
       </Routes>
     </BrowserRouter>

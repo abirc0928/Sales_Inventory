@@ -35,10 +35,10 @@ const Sidebar = () => {
                 <span className="side-bar-item-caption">Invoice</span>
             </Link>
 
-            <a href="reportPage.html" className="side-bar-item">
+            <Link to="report" className="side-bar-item">
                 <i className="bi bi-file-earmark-bar-graph"></i>
                 <span className="side-bar-item-caption">Report</span>
-            </a>
+            </Link>
         </div>
 
     )
