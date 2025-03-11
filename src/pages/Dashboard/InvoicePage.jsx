@@ -3,13 +3,19 @@ import { destroyDataTable, makeDataTable } from "../../utils/datatable";
 import myaxios from "../../utils/myaxios";
 import InvoiceDelete from '../../components/invoice/InvoiceDelete';
 import InvoiceDetails from '../../components/invoice/InvoiceDetails';
+import { useNavigate } from 'react-router'
 
 const InvoicePage = () => {
+    const navigate = useNavigate();
     const dataTable = useRef(null);
     const [data, setData] = useState([]);
     const [customerData, setCustomerData] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
+    const [idTodelete, setIdTodelete] = useState(null)
+    const [idToDetails, setidToDetails] = useState(null)
+    const [customerId, setCustomerId] = useState(null)
 
+    console.log(idTodelete)
     const loadData = () => {
         setIsLoading(true);
         myaxios.get("/invoice-select")
@@ -23,15 +29,15 @@ const InvoicePage = () => {
     const loadCustomerData = () => {
         myaxios.get("/list-customer")
             .then((response) => setCustomerData(response.data))
-            .catch(() => {});
+            .catch(() => { });
     };
 
-    const findCustomer = (customerId, field) => {
+    const findCustomer = (customerId, field='null') => {
         if (customerData.length === 0) return "Loading...";
         const customer = customerData.find((customer) => customer.id === customerId);
         if (customer) {
-            return field === 'name' ? customer.name : field === 'mobile' ? customer.mobile : "";
-        } 
+            return field === 'name' ? customer.name : field === 'mobile' ? customer.mobile : customer;
+        }
         return "Customer not found";
     };
 
@@ -65,7 +71,7 @@ const InvoicePage = () => {
                                 <h5>Invoices</h5>
                             </div>
                             <div className="align-items-center col">
-                                <a href="salePage.html" className="float-end btn m-0 bg-gradient-primary">Create Sale</a>
+                                <a className="float-end btn m-0 bg-gradient-primary" onClick={() =>navigate("/dashboard/creact_sales")}>Create Sale</a>
                             </div>
                         </div>
                         <hr className="bg-dark" />
@@ -93,8 +99,11 @@ const InvoicePage = () => {
                                         <td>{item.discount}</td>
                                         <td>{item.payable}</td>
                                         <td>
-                                            <button type="button" className="viewBtn btn btn-outline-dark text-sm px-3 py-1 btn-sm m-0" data-bs-target=".details-modal" data-bs-toggle="modal"><i className="fa text-sm fa-eye"></i></button>
-                                            <button type="button" className="deleteBtn btn btn-outline-dark text-sm px-3 py-1 btn-sm m-0" data-bs-target=".deleteModal" data-bs-toggle="modal"><i className="fa text-sm fa-trash-alt"></i></button>
+                                            <button type="button" className="viewBtn btn btn-outline-dark text-sm px-3 py-1 btn-sm m-0" data-bs-target=".details-modal" data-bs-toggle="modal" onClick={() => {
+                                                setidToDetails(item.id)
+                                                setCustomerId(item.customer_id)
+                                            }}><i className="fa text-sm fa-eye"></i></button>
+                                            <button type="button" className="deleteBtn btn btn-outline-dark text-sm px-3 py-1 btn-sm m-0" data-bs-target=".deleteModal" data-bs-toggle="modal" onClick={() => setIdTodelete(item.id)}><i className="fa text-sm fa-trash-alt"></i></button>
                                         </td>
                                     </tr>
                                 ))}
@@ -103,8 +112,8 @@ const InvoicePage = () => {
                     </div>
                 </div>
             </div>
-            <InvoiceDelete />
-            <InvoiceDetails />
+            <InvoiceDelete id={idTodelete} loadData={loadData} loadCustomerData={loadCustomerData} />
+            <InvoiceDetails invoiceId={idToDetails} customerId={customerId}/>
         </div>
     );
 }
