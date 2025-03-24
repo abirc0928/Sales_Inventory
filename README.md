@@ -20,10 +20,10 @@
 This system improves efficiency and accuracy for businesses, making inventory tracking and sales management effortless. 🚀
 
 ## Technologies Used
-- **Frontend:** ReactJS, Bootstarp 
+- **Frontend:** ReactJS, Bootstrap, React Router DOM (for routing), Axios (for API calls)
 - **Backend:** Django Rest Framework (DRF)  
 - **Authentication:** JWT-based authentication  
-- **Hosting:** Netlify (Frontend), Backend (TBD)  
+- **Hosting:** Netlify (Frontend)
 
 ## Installation & Setup
 
